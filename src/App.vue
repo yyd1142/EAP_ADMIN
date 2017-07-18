@@ -6,12 +6,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'app'
-}
-</script>
-
 <style>
 body {
   margin: 0;
@@ -45,7 +39,7 @@ input {
   -webkit-appearance: none;
 }
 
-.page-wrap{
+.page-wrap {
   width: 100%;
   margin: auto;
   padding-left: 168px;

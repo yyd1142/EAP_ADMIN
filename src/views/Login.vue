@@ -41,7 +41,7 @@ export default {
     .login-bar {
         width: 100vw;
         height: 200px;
-        background-color: #7e57c2;
+        background-color: #474a4f;
         display: table;
         .text {
             line-height: 200px;
@@ -67,7 +67,7 @@ export default {
             height: 48px;
             line-height: 48px;
             text-align: center;
-            background-color: #7e57c2;
+            background-color: #474a4f;
             color: #ffffff;
             font-size: 18px;
             border-radius: 4px 4px 0 0;
@@ -90,7 +90,7 @@ export default {
 }
 
 .login-btn {
-    background-color: #7e57c2;
+    background-color: #474a4f;
     color: #ffffff;
     margin-top: 24px;
 }

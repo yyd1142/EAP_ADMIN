@@ -2,21 +2,21 @@
     <div class="menu">
         <mu-appbar title="深圳巴士集团EAP管理后台">
             <mu-icon-button icon="menu" slot="left" />
-            <mu-flat-button label="expand_more" slot="right" />
+            <mu-flat-button label="你好，管理员YYD" slot="right" />
             <mu-icon-button icon="expand_more" slot="right" />
         </mu-appbar>
         <div class="menu-wrap">
             <ul class="menu-table-view">
-                <li class="menu-table-cell">
+                <li class="menu-table-cell" :class="actived === 'activity' ? 'actived' : ''" @click="linkPath('/activity')">
                     <span>活动列表</span>
                 </li>
-                <li class="menu-table-cell">
+                <li class="menu-table-cell" :class="actived === 'user' ? 'actived' : ''" @click="linkPath('/user')">
                     <span>用户管理</span>
                 </li>
-                <li class="menu-table-cell">
+                <li class="menu-table-cell" :class="actived === 'statistics' ? 'actived' : ''" @click="linkPath('/statistics')">
                     <span>数据统计</span>
                 </li>
-                <li class="menu-table-cell">
+                <li class="menu-table-cell" :class="actived === 'config' ? 'actived' : ''" @click="linkPath('/config')">
                     <span>修改密码</span>
                 </li>
             </ul>
@@ -32,7 +32,7 @@
         top: 64px;
         bottom: 0;
         height: 100vh;
-        background-color: #7e57c2;
+        background-color: #474a4f;
         .menu-table-view {
             width: 100%;
             .menu-table-cell {
@@ -48,8 +48,8 @@
                     display: block;
                     text-align: CENTER;
                 }
-                &:hover {
-                    background-color: #744db7;
+                &:hover, &.actived {
+                    background-color: #7e848c;
                 }
             }
         }
@@ -59,9 +59,15 @@
 
 <script>
 export default {
+    props: ['actived'],
     data() {
         return {
 
+        }
+    },
+    methods: {
+        linkPath(path) {
+            this.$router.push(path)
         }
     }
 }
