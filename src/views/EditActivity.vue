@@ -24,8 +24,8 @@
                     </div>
                 </div>
                 <div class="right">
-                    <div class="add-cover">
-                        <mu-raised-button class="add-button" label="上传封面" icon="add" />
+                    <div class="add-cover" id="coverContainer">
+                        <mu-raised-button id="uploadCoverButton" class="add-button" label="上传封面" icon="add" />
                     </div>
                     <mu-text-field class="text-field" label="添加志愿者" labelFloat icon="search" />
                     <mu-chip class="demo-chip" @delete="handleClose" showDelete> 周小茶 </mu-chip>
@@ -60,6 +60,9 @@ export default {
                 }
             }
         }
+    },
+    mounted() {
+        this.$uploadFile('uploadCoverButton', 'coverContainer')
     },
     methods: {
         handleClose() {

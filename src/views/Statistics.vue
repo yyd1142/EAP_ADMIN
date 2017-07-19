@@ -9,7 +9,7 @@
             <div class="active-tab1" v-if="activeTab === 'tab1'">
                 <div class="actions">
                     <mu-raised-button label="总数据" class="demo-raised-button" />
-                    <mu-raised-button label="指定月份数据" class="demo-raised-button" primary/>
+                    <mu-raised-button label="指定月份数据" class="demo-raised-button" primary @click="filterMonth_Show = true;"/>
                 </div>
                 <mu-divider/>
                 <mu-table :selectable="false" ref="table">
@@ -40,7 +40,7 @@
                     </mu-tbody>
                 </mu-table>
                 <div class="pagination">
-                    <mu-raised-button label="导出数据" class="daochu-raised-button" icon="publish" @click="exportDatas_Show = true;"/>
+                    <mu-raised-button label="导出数据" class="daochu-raised-button" icon="publish" @click="exportDatas_Show = true;" />
                     <mu-pagination class="item" :total="total" :current="current" @pageChange="handleClick"></mu-pagination>
                 </div>
             </div>
@@ -56,6 +56,12 @@
             <mu-flat-button slot="actions" @click="exportDatas_Show = false;" label="取消" />
             <mu-flat-button slot="actions" primary @click="exportDatas_Show = false;" label="确定" />
         </mu-dialog>
+        <mu-dialog :open="filterMonth_Show" title="指定月份数据">
+            <mu-date-picker mode="landscape" label="开始日期" labelFloat/>
+            <mu-date-picker mode="landscape" label="结束日期" labelFloat/>
+            <mu-flat-button slot="actions" @click="filterMonth_Show = false;" label="取消" />
+            <mu-flat-button slot="actions" primary @click="filterMonth_Show = false;" label="确定" />
+        </mu-dialog>
     </div>
 </template>
 
@@ -69,7 +75,8 @@ export default {
             total: 500,
             current: 1,
             exportType: 1,
-            exportDatas_Show: false
+            exportDatas_Show: false,
+            filterMonth_Show: false
         }
     },
     methods: {

@@ -2,36 +2,20 @@
     <div class="add">
         <menu-bar actived="activity"></menu-bar>
         <div class="page-wrap activity-page-wrap">
-            <mu-raised-button class="back-button" label="创建活动" icon="keyboard_arrow_left" primary @click="back" />
+            <mu-raised-button class="back-button" label="活动反馈" icon="keyboard_arrow_left" primary @click="back" />
             <div class="add-act-wrap">
                 <div class="left">
                     <div class="top">
-                        <mu-select-field class="select-field" hintText="活动类型">
-                            <mu-menu-item v-for="text,index in list" :key="index" :value="index" :title="text" />
-                        </mu-select-field>
-                        <mu-select-field class="select-field" hintText="人数范围">
-                            <mu-menu-item v-for="text,index in list" :key="index" :value="index" :title="text" />
-                        </mu-select-field>
-                        <mu-select-field class="select-field" hintText="活动地点">
-                            <mu-menu-item v-for="text,index in list" :key="index" :value="index" :title="text" />
-                        </mu-select-field>
-                        <mu-time-picker class="time-field" mode="landscape" hintText="活动时间" />
-                        <mu-date-picker class="time-field" mode="landscape" hintText="活动日期" />
-                        <mu-text-field class="text-field" hintText="活动标题" />
+                        <mu-text-field class="text-field" hintText="请输入标题" />
                     </div>
                     <div class="bottom">
                         <editor></editor>
                     </div>
                 </div>
                 <div class="right">
-                    <div class="add-cover" id="coverContainer">
-                        <mu-raised-button id="uploadCoverButton" class="add-button" label="上传封面" icon="add" />
+                    <div class="add-cover">
+                        <mu-raised-button class="add-button" label="上传封面" icon="add" />
                     </div>
-                    <mu-text-field class="text-field" label="添加志愿者" labelFloat icon="search" />
-                    <mu-chip class="demo-chip" @delete="handleClose" showDelete> 周小茶 </mu-chip>
-                    <mu-chip class="demo-chip" @delete="handleClose" showDelete> 黄叉烧 </mu-chip>
-                    <mu-chip class="demo-chip" @delete="handleClose" showDelete> 猪一笼 </mu-chip>
-                    <mu-chip class="demo-chip" @delete="handleClose" showDelete> 余多多 </mu-chip>
                 </div>
             </div>
         </div>
@@ -43,14 +27,23 @@ import { MenuBar, Editor } from 'components'
 export default {
     data() {
         return {
-            list: ['请选择', '影之刃', '天下HD', '穿越火线', '英雄联盟', '王者荣耀']
+            content: '',
+            list: ['请选择', '影之刃', '天下HD', '穿越火线', '英雄联盟', '王者荣耀'],
+            editorOpton: {
+                placeholder: '请输入内容',
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'align': [] }],
+                        ['link', 'image', 'video'],
+                        ['clean']
+                    ]
+                }
+            }
         }
-    },
-    mounted() {
-        this.$uploadFile('uploadCoverButton', 'coverContainer')
-    },
-    activated() {
-
     },
     methods: {
         handleClose() {
@@ -92,6 +85,9 @@ export default {
                     border-bottom: 1px solid #e0e0e0;
                     .time-field {
                         margin: auto;
+                    }
+                    .text-field {
+                        width: 100%;
                     }
                     .select-field {
                         margin-bottom: 0;

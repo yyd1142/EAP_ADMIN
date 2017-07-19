@@ -9,6 +9,7 @@ const User = resolve => require(['@/views/User.vue'], resolve)
 const UserDetail = resolve => require(['@/views/UserDetail.vue'], resolve)
 const Statistics = resolve => require(['@/views/Statistics.vue'], resolve)
 const Config = resolve => require(['@/views/Config.vue'], resolve)
+const Feedback = resolve => require(['@/views/Feedback.vue'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +49,10 @@ export default new Router({
     {
       path: '/config',
       component: Config
+    },
+    {
+      path: '/feedback',
+      component: Feedback
     }
   ]
 })

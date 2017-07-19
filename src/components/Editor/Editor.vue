@@ -1,23 +1,11 @@
 <template>
     <div class="main">
+        <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
         <quill-editor class="editor" ref="newEditor" v-model="content" :options="editorOpton">
             <div id="toolbar" slot="toolbar">
-                <!-- Add a bold button -->
-                <button class="ql-bold">Bold</button>
-                <button class="ql-italic">Italic</button>
-                <button class="ql-underline">Underline</button>
-                <button class="ql-strike">Strike</button>
-                <!-- Add font size dropdown -->
-                <select class="ql-size">
-                    <option value="small"></option>
-                    <!-- Note a missing, thus falsy value, is used to reset to default -->
-                    <option selected></option>
-                    <option value="large"></option>
-                    <option value="huge"></option>
-                </select>
-                <button class="ql-link">Link</button>
-                <button class="ql-video">Video</button>
-                <mu-icon class="upload-img-btn" value="insert_photo" @click="uploadPhoto" :size="23"/>
+                <span id="container">
+                    <mu-icon id="selectfiles" class="upload-img-btn" value="insert_photo" @click="uploadPhoto" :size="19" />
+                </span>
             </div>
         </quill-editor>
         <div class="actions">
@@ -47,7 +35,7 @@
 }
 
 .upload-img-btn {
-    width: 100px;
+    margin: 2px 0 0 3px;
     cursor: pointer;
     &:hover {
         color: #06c;
@@ -64,10 +52,31 @@ export default {
             editorOpton: {
                 placeholder: '请输入内容',
                 modules: {
-                    toolbar: '#toolbar'
+                    toolbar: [
+                        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                        ['blockquote', 'code-block'],
+
+                        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+                        [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+                        [{ 'direction': 'rtl' }],                         // text direction
+
+                        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                        [{ 'font': [] }],
+                        [{ 'align': [] }],
+
+                        ['clean']
+                    ]
                 }
             }
         }
+    },
+    mounted() {
+        this.$uploadFile('selectfiles', 'container')
     },
     methods: {
         uploadPhoto() {
