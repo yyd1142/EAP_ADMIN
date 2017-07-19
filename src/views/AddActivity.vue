@@ -2,7 +2,7 @@
     <div class="add">
         <menu-bar actived="activity"></menu-bar>
         <div class="page-wrap activity-page-wrap">
-            <mu-raised-button class="back-button" label="创建活动" icon="keyboard_arrow_left" primary @click="back"/>
+            <mu-raised-button class="back-button" label="创建活动" icon="keyboard_arrow_left" primary @click="back" />
             <div class="add-act-wrap">
                 <div class="left">
                     <div class="top">
@@ -17,15 +17,10 @@
                         </mu-select-field>
                         <mu-time-picker class="time-field" mode="landscape" hintText="活动时间" />
                         <mu-date-picker class="time-field" mode="landscape" hintText="活动日期" />
-                        <mu-text-field class="text-field" hintText="活动标题"/>
+                        <mu-text-field class="text-field" hintText="活动标题" />
                     </div>
                     <div class="bottom">
-                        <quill-editor v-model="content" :options="editorOpton"></quill-editor>
-                        <div class="actions">
-                            <mu-raised-button label="保存" class="actions-button" />
-                            <mu-raised-button label="预览" class="actions-button" />
-                            <mu-raised-button label="保存并发布" class="actions-button" primary/>
-                        </div>
+                        <editor></editor>
                     </div>
                 </div>
                 <div class="right">
@@ -44,16 +39,18 @@
 </template>
 
 <script>
-import { MenuBar } from 'components'
+import { MenuBar, Editor } from 'components'
 export default {
     data() {
         return {
-            content: '',
-            list: ['请选择', '影之刃', '天下HD', '穿越火线', '英雄联盟', '王者荣耀'],
-            editorOpton: {
-                placeholder: '请输入内容'
-            }
+            list: ['请选择', '影之刃', '天下HD', '穿越火线', '英雄联盟', '王者荣耀']
         }
+    },
+    mounted() {
+        
+    },
+    activated() {
+
     },
     methods: {
         handleClose() {
@@ -64,7 +61,8 @@ export default {
         }
     },
     components: {
-        MenuBar
+        MenuBar,
+        Editor
     }
 }
 </script>
@@ -104,16 +102,6 @@ export default {
                     padding: 15px;
                     height: 500px;
                     position: relative;
-                    .actions {
-                        width: 100%;
-                        height: 44px;
-                        position: absolute;
-                        bottom: -54px;
-                        text-align: center;
-                        .actions-button {
-                            margin: 0 10px;
-                        }
-                    }
                 }
             }
             .right {

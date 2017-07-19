@@ -6,12 +6,25 @@
             <div class="active-tab1">
                 <div class="statistics">
                     <div class="canyu">
-                        <span>参与角色统计</span>
-                        <span>1次组织者&nbsp;&nbsp;&nbsp;3次志愿者&nbsp;&nbsp;&nbsp;4次参与者</span>
+                        <span>参与角色统计：</span>
+                        <span>
+                            <mu-chip class="demo-chip">1次组织者</mu-chip>
+                            <mu-chip class="demo-chip">3次志愿者</mu-chip>
+                            <mu-chip class="demo-chip">4次参与者</mu-chip>
+                        </span>
                     </div>
                     <div class="canyu">
-                        <span>基本信息</span>
-                        <span>姓名：杨子康&nbsp;&nbsp;&nbsp;公司：深圳巴士集团&nbsp;&nbsp;&nbsp;性别：男&nbsp;&nbsp;&nbsp;角色：EAP专员&nbsp;&nbsp;&nbsp;工号：9527&nbsp;&nbsp;&nbsp;电话：14333333333&nbsp;&nbsp;&nbsp;年龄：25&nbsp;&nbsp;&nbsp;积分：244</span>
+                        <span>基本信息：</span>
+                        <span>
+                            <mu-chip class="demo-chip">姓名：杨子康</mu-chip>
+                            <mu-chip class="demo-chip">公司：深圳巴士集团</mu-chip>
+                            <mu-chip class="demo-chip">性别：男</mu-chip>
+                            <mu-chip class="demo-chip">角色：EAP专员</mu-chip>
+                            <mu-chip class="demo-chip">工号：9527</mu-chip>
+                            <mu-chip class="demo-chip">电话：14333333333</mu-chip>
+                            <mu-chip class="demo-chip">年龄：25</mu-chip>
+                            <mu-chip class="demo-chip">积分：244</mu-chip>
+                        </span>
                     </div>
                 </div>
                 <mu-divider/>
@@ -89,8 +102,9 @@ export default {
             margin-top: 15px;
             .statistics {
                 width: 100%;
-                height: 50px;
                 .canyu {
+                    width: 100%;
+                    height: 45px;
                     span:first-child {
                         font-weight: bold;
                         font-size: 16px;

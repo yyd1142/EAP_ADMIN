@@ -8,13 +8,17 @@
             </mu-tabs>
             <mu-raised-button label="创建活动" class="create-button" primary @click="linkPath('/add_activity')" />
             <div class="active-tab1" v-if="activeTab === 'tab1'">
-                <mu-date-picker mode="landscape" hintText="请选择活动日期" />
-                <mu-select-field v-model="game1" class="select-field">
-                    <mu-menu-item v-for="text,index in list" :key="index" :value="index" :title="text" />
-                </mu-select-field>
-                <mu-raised-button label="筛选" class="demo-raised-button" />
-                <mu-raised-button label="重置" class="demo-raised-button" primary/>
-                <mu-text-field hintText="搜索活动标题、发布人" class="form-field" :underlineShow="true" icon="search" />
+                <div class="actions">
+                    <mu-date-picker class="date-picker" mode="landscape" hintText="请选择活动日期" />
+                    <mu-select-field class="select-field" hintText="请选择活动发布单位">
+                        <mu-menu-item v-for="text,index in list" :key="index" :value="index" :title="text" />
+                    </mu-select-field>
+                    <div class="buttons">
+                        <mu-raised-button label="筛选" class="demo-raised-button" />
+                        <mu-raised-button label="重置" class="demo-raised-button" primary/>
+                    </div>
+                    <mu-text-field hintText="搜索活动标题、发布人" class="form-field" :underlineShow="true" icon="search" />
+                </div>
                 <mu-divider/>
                 <mu-table :selectable="false" ref="table">
                     <mu-thead>
@@ -50,7 +54,7 @@
                     </mu-tbody>
                 </mu-table>
                 <div class="pagination">
-                    <mu-raised-button label="导出数据" class="daochu-raised-button" icon="publish" />
+                    <mu-raised-button label="导出数据" class="daochu-raised-button" icon="publish" @click="exportDatas_Show = true;" />
                     <mu-pagination class="item" :total="total" :current="current" @pageChange="handleClick"></mu-pagination>
                 </div>
             </div>
@@ -61,9 +65,20 @@
                 </p>
             </div>
         </div>
-        <mu-dialog :open="QR_CODE_Show" title="签到请扫二维码" @close="QR_CODE_Show = false;">
+        <mu-dialog :open="QR_CODE_Show" title="签到请扫二维码">
             <img class="qr-code" src="http://img.t.sinajs.cn/t6/style/images/common/footer_code.jpg">
             <mu-flat-button slot="actions" primary @click="QR_CODE_Show = false;" label="确定" />
+        </mu-dialog>
+        <mu-dialog :open="exportDatas_Show" title="导出数据">
+            <mu-radio label="导出当前筛选数据" name="group" :nativeValue="1" v-model="exportType" class="demo-radio" />
+            <br/>
+            <mu-radio label="按月份导出全部数据" name="group" :nativeValue="2" v-model="exportType" class="demo-radio" />
+            <div v-if="exportType == 2">
+                <mu-date-picker mode="landscape" label="开始日期" labelFloat/>
+                <mu-date-picker mode="landscape" label="结束日期" labelFloat/>
+            </div>
+            <mu-flat-button slot="actions" @click="exportDatas_Show = false;" label="取消" />
+            <mu-flat-button slot="actions" primary @click="exportDatas_Show = false;" label="确定" />
         </mu-dialog>
     </div>
 </template>
@@ -75,10 +90,12 @@ export default {
         return {
             activeTab: 'tab1',
             game1: 0,
-            list: ['请选择活动发布单位', '影之刃', '天下HD', '穿越火线', '英雄联盟', '王者荣耀'],
+            list: ['部落冲突', '影之刃', '天下HD', '穿越火线', '英雄联盟', '王者荣耀'],
             total: 500,
             current: 1,
-            QR_CODE_Show: false
+            QR_CODE_Show: false,
+            exportDatas_Show: false,
+            exportType: 1
         }
     },
     methods: {
@@ -125,16 +142,31 @@ export default {
         padding: 15px;
         border-radius: 4px;
         margin-top: 15px;
-        .select-field {
-            width: 256px;
-            display: inline-grid;
-        }
-        .form-field {
-            position: fixed;
-            right: 30px;
-        }
-        .demo-raised-button {
-            margin: 0 10px 0 0;
+        .actions {
+            width: 100%;
+            height: 50px;
+            position: relative;
+            display: inline-flex;
+            .date-picker {
+                margin-right: 3px;
+            }
+            .select-field {
+                margin-bottom: 0;
+            }
+            .buttons {
+                width: auto;
+                height: 50px;
+                position: absolute;
+                left: 535px;
+                top: 0;
+                .demo-raised-button {
+                    margin: 0 10px 0 0;
+                }
+            }
+            .form-field {
+                position: absolute;
+                right: 0;
+            }
         }
         .pagination {
             width: 100%;

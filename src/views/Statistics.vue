@@ -40,25 +40,21 @@
                     </mu-tbody>
                 </mu-table>
                 <div class="pagination">
-                    <mu-raised-button label="导出数据" class="daochu-raised-button" icon="publish" />
+                    <mu-raised-button label="导出数据" class="daochu-raised-button" icon="publish" @click="exportDatas_Show = true;"/>
                     <mu-pagination class="item" :total="total" :current="current" @pageChange="handleClick"></mu-pagination>
                 </div>
             </div>
         </div>
-        <mu-dialog :open="editViewShow" title="姓名：余多多     工号：9527">
-            <div class="dialog-main">
-                <mu-select-field class="select-field" label="性别" labelFloat>
-                    <mu-menu-item v-for="text,index in list" :key="index" :value="index" :title="text" />
-                </mu-select-field>
-                <mu-select-field class="select-field" label="单位" labelFloat>
-                    <mu-menu-item v-for="text,index in list" :key="index" :value="index" :title="text" />
-                </mu-select-field>
-                <mu-select-field class="select-field" label="角色" labelFloat>
-                    <mu-menu-item v-for="text,index in list" :key="index" :value="index" :title="text" />
-                </mu-select-field>
+        <mu-dialog :open="exportDatas_Show" title="导出数据">
+            <mu-radio label="导出当前筛选数据" name="group" :nativeValue="1" v-model="exportType" class="demo-radio" />
+            <br/>
+            <mu-radio label="按月份导出全部数据" name="group" :nativeValue="2" v-model="exportType" class="demo-radio" />
+            <div v-if="exportType == 2">
+                <mu-date-picker mode="landscape" label="开始日期" labelFloat/>
+                <mu-date-picker mode="landscape" label="结束日期" labelFloat/>
             </div>
-            <mu-flat-button slot="actions" @click="cancel" primary label="取消" />
-            <mu-flat-button slot="actions" primary @click="submit" label="确定" />
+            <mu-flat-button slot="actions" @click="exportDatas_Show = false;" label="取消" />
+            <mu-flat-button slot="actions" primary @click="exportDatas_Show = false;" label="确定" />
         </mu-dialog>
     </div>
 </template>
@@ -72,7 +68,8 @@ export default {
             list: ['请选择活动发布单位', '影之刃', '天下HD', '穿越火线', '英雄联盟', '王者荣耀'],
             total: 500,
             current: 1,
-            editViewShow: false
+            exportType: 1,
+            exportDatas_Show: false
         }
     },
     methods: {
